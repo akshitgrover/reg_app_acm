@@ -7,6 +7,9 @@ var flag = new schema({
 	},
 	password:{
 		type:'string'
+	},
+	expiredtoken:{
+		type:'array',
 	}
 });
 

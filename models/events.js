@@ -13,8 +13,8 @@ var flag = new schema({
 		defaultsTo:[]
 	},
 	values:{
-		type:'array',
-		defaultsTo:[]
+		type:'object',
+		defaultsTo:{}
 	}
 });
 

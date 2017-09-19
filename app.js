@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
 var db = require('mongoose');
 var app = express();
@@ -11,6 +12,8 @@ var multipart = require('connect-multiparty');
 
 var Events  = require('./controllers/events.js');
 var User = require('./controllers/user.js');
+
+var tokenAuth = require('./policies/tokenAuth.js');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,6 +27,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({secret:'deathadder',saveUninitialized:true,resave:true}));
 
 app.use('/events',Events);
 app.use('/user',User);
