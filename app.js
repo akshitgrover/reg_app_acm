@@ -30,6 +30,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({secret:'deathadder',saveUninitialized:true,resave:true}));
 
+app.route('/get').get(tokenAuth);
+app.route('/events/create').post(tokenAuth);
+app.route('/events/addfield').post(tokenAuth);
+app.route('/events/delete').post(tokenAuth);
+
 app.use('/events',Events);
 app.use('/user',User);
 
@@ -51,7 +56,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-db.connect('mongodb://localhost:27017/reg_app_acm',function(err,db){
+db.connect('mongodb://Deathadder:1516@ds237855.mlab.com:37855/reg_app_acm',function(err,db){
 		if(err){
 			console.log("Couldn't Connect To MongoDb.");
 			return err;

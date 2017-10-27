@@ -14,7 +14,10 @@ router.get('/create',function(req,res){
 
 router.post('/create',function(req,res){
 	if(!req.session.authenticated){
-		return res.render('login');
+		return res.render('login',{err:"Please Login."});
+	}
+	if(req.body.password!=req.body.confirmpassword){
+		return res.render('login',{err:"Passwords Didn't Match."});
 	}
 	User.find({username:req.body.username},function(err,data){
 		if(err){
@@ -48,7 +51,12 @@ router.post('/login',function(req,res){
 					return res.status(500).json({err:"Something Went Wrong."});
 				}
 				var token = jwt.issue({username:user.username});
-				return res.status(200).json({msg:"LoggedIn Successfully.",events:events,token:token});
+				var obj = {};
+				console.log(events);
+				events.forEach(function(data){
+					obj[data.name] = data;
+				});
+				return res.status(200).json({msg:"LoggedIn Successfully.",events:obj,token:token});
 			});
 			return;
 		}

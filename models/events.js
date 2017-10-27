@@ -8,13 +8,28 @@ var flag = new schema({
 	active:{
 		type:'boolean'
 	},
-	fields:{
+	fields_one:{
 		type:'array',
 		defaultsTo:[]
 	},
-	values:{
+	fields_two:{
+		type:'array',
+		defaultsTo:[]
+	},
+	values_one:{
 		type:'object',
 		defaultsTo:{}
+	},
+	values_two:{
+		type:'object',
+		defaultsTo:{}
+	},
+	checkedIn:{
+		type:'array',
+		defautlsTo:[]
+	},
+	unique:{
+		type:'array'
 	}
 });
 
